@@ -52,18 +52,10 @@ fig = go.Figure(data=[go.Table(
                fill_color='lavender',
                align='left'))])
 
-# Width adjusting
-column_widths = [1000] * len(df_single_stock.columns)  # Définir la largeur de chaque colonne ici (en pixels)
-fig.update_layout(autosize=False, width=2200, height=600)  # Définir la taille de la figure
-fig.update_layout({'xaxis': {'fixedrange': True}})  # Fixer la largeur de la table
+# Width and Height adjusting
+column_widths = [1000] * len(df_single_stock.columns)  # Width
+fig.update_layout(autosize=False, width=2200, height=600)  # Height
+fig.update_layout({'xaxis': {'fixedrange': True}})  # fix width
 
 
-fig.show()
-
-# Ajustement de la largeur des colonnes
-column_widths = [1000] * len(df_single_stock.columns)  # Définir la largeur de chaque colonne ici (en pixels)
-fig.update_layout(autosize=False, width=2200, height=600)  # Définir la taille de la figure
-fig.update_layout({'xaxis': {'fixedrange': True}})  # Fixer la largeur de la table
-
-# Affichage de la figure
 fig.show()
