@@ -1,4 +1,8 @@
 # Python-Group-Project
+!pip install eikon
+import eikon
+import datetime
+
 import refinitiv.data.eikon as ek
 from IPython.display import HTML
 ek.set_app_key('1131f92f9ebc4ec3870206fdf495a52af08a3795')
