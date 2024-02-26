@@ -5,8 +5,6 @@ import refinitiv.data as rd
 import numpy as np
 import pandas as pd
 import matplotlib as plt
-import warnings
-warnings.filterwarnings("ignore")
 %matplotlib inline
 import warnings
 import plotly.graph_objects as go
@@ -15,7 +13,7 @@ warnings.filterwarnings("ignore")
 
 
 # Datas for the studied stock
-stock_symbol = 'HRMS.PA'  # Replace the value of stock_symbol to get the datas for the stock wanted
+stock_symbol = 'LVMH.PA'  # Replace the value of stock_symbol to get the datas for the stock wanted
 df_single_stock = rd.get_data(stock_symbol, ['TR.TRBCEconomicSector', 'TR.CO2EmissionTotal(Period=FY0)',
                               'TR.CO2IndirectScope3(Period=FY0)', 'TR.DividendYield'])
 
@@ -26,6 +24,7 @@ df_single_stock.columns = ['Instrument', 'Sector',  'CO2Emissions', 'CO2Emission
 # Calculations
 df_single_stock['CO2PerYield'] = (df_single_stock['CO2Emissions'] + df_single_stock['CO2EmissionsScope3'])  / df_single_stock['DividendYield']
 df_single_stock = df_single_stock.round(3)
+
 # Plotly package
 fig = go.Figure(data=[go.Table(
     header=dict(values=list(df_single_stock.columns),
