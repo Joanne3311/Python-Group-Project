@@ -31,15 +31,17 @@ app.layout = html.Div([
 def update_map(selected_stock):
    
 # Updating the map after inputting the specific name/stock code
-    updated_fig = px.choropleth(
-        df,
+
+ filtered_df = df[df['country'] == selected_stock]
+
+ updated_fig = px.choropleth(
+        filtered_df, 
         locations="iso_alpha",
         color="country",
         hover_name="country",
         projection="natural earth",
     )
-
-    return updated_fig
+ return updated_fig
 
 
 if __name__ == '__main__':
