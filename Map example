@@ -1,0 +1,32 @@
+import plotly.graph_objects as go
+
+# 创建地图数据
+fig = go.Figure(go.Choropleth(
+    locations = ["USA", "CAN", "MEX"],
+    z = [100, 200, 300],  # 这是您的数据值
+    text = ["United States", "Canada", "Mexico"],
+    colorscale = 'Blues',  # 调色板
+    autocolorscale=False,
+    marker_line_color='darkgray',
+    marker_line_width=0.5,
+    colorbar_title = 'Amount'
+))
+
+# 设置地图布局
+fig.update_layout(
+    title_text = 'North America Countries',
+    geo=dict(
+        showframe=False,
+        showcoastlines=True,
+        projection_type='equirectangular'
+    )
+)
+
+# 添加点击事件处理函数
+fig.update_traces(
+    customdata=[100, 200, 300],  # 每个国家的数据值
+    hovertemplate='<b>%{text}</b><br>Value: %{customdata}',  # 悬停时显示的模板，包括国家名称和数据值
+)
+
+# 显示地图
+fig.show()
