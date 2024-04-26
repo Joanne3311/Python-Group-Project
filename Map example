@@ -3,8 +3,8 @@ import plotly.graph_objects as go
 # 创建地图数据
 fig = go.Figure(go.Choropleth(
     locations = ['CHN', 'KOR', 'JPN', 'IND', 'USA', 'IDN', 'RUS', 'IRN', 'SAU', 'DEU'],
-    z = [11397, 601, 1054, 2830, 5057, 729, 5057, 2830, 1652, 691, 663, 666],  # 这是您的数据值
-    text = ["China 601 MtCO₂", "South Korea 601 MtCO₂", "Japan 1054 MtCO₂", "India 2830 MtCO₂", "USA 5057 MtCO₂", "Indonesia 729 MtCO₂", "Russia 1652 MtCO₂", "Iran 691 MtCO₂", "Saudi Arabia 663 MtCO₂", "Germany 666 MtCO₂"],
+    z = [11397, 601, 1054, 2830, 5057, 729, 1652, 691, 663, 666],  # 这是您的数据值
+    text = ["China #1", "South Korea #10", "Japan #5", "India #3", "USA #2", "Indonesia #6", "Russia #4", "Iran #7", "Saudi Arabia #9", "Germany #8"],
     colorscale = 'Blues',  # 调色板
     autocolorscale=False,
     marker_line_color='darkgray',
@@ -24,7 +24,7 @@ fig.update_layout(
 
 # 添加点击事件处理函数
 fig.update_traces(
-    customdata=[100, 200, 300],  # 每个国家的数据值
+    customdata=[11397, 601, 1054, 2830, 5057, 729, 5057, 2830, 1652, 691, 663, 666],  # 每个国家的数据值
     hovertemplate='<b>%{text}</b><br>Value: %{customdata}',  # 悬停时显示的模板，包括国家名称和数据值
 )
 
