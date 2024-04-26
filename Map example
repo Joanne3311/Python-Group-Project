@@ -30,3 +30,29 @@ fig.update_traces(
 
 # 显示地图
 fig.show()
+
+import plotly.graph_objects as go
+
+# 數據
+countries = ['China', 'South Korea', 'Japan', 'India', 'USA', 'Indonesia', 'Russia', 'Iran', 'Saudi Arabia', 'Germany']
+codes = ['CHN', 'KOR', 'JPN', 'IND', 'USA', 'IDN', 'RUS', 'IRN', 'SAU', 'DEU']
+emissions = [11397, 601, 1054, 2830, 5057, 729, 1652, 691, 663, 666]
+text = ["China #1", "South Korea #10", "Japan #5", "India #3", "USA #2", "Indonesia #6", "Russia #4", "Iran #7", "Saudi Arabia #9", "Germany #8"]
+
+# 创建表格
+fig = go.Figure(data=[go.Table(
+    header=dict(values=['Rank', 'Country', 'MtCO₂'],
+                fill_color='paleturquoise',
+                align='center'),
+    cells=dict(values=[list(range(1, 11)), countries, emissions],
+               fill_color='lavender',
+               align='center'))
+])
+
+# 设置标题
+fig.update_layout(
+    title='Countries: Carbon Emission Rank Top 10 (MtCO₂)'
+)
+
+# 显示表格
+fig.show()
