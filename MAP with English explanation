@@ -1,58 +1,59 @@
 import plotly.graph_objects as go
 
-# Create map data
-fig = go.Figure(go.Choropleth(
-    locations = ['CHN', 'KOR', 'JPN', 'IND', 'USA', 'IDN', 'RUS', 'IRN', 'SAU', 'DEU'],
-    z = [11397, 601, 1054, 2830, 5057, 729, 1652, 691, 663, 666],  # These are the data values
-    text = ["China #1", "South Korea #10", "Japan #5", "India #3", "USA #2", "Indonesia #6", "Russia #4", "Iran #7", "Saudi Arabia #9", "Germany #8"],
-    colorscale='Reds',  # Using the Reds color scale
-    autocolorscale=False,
-    marker_line_color='darkgray',
-    marker_line_width=0.5,
-    colorbar_title='Amount'
-))
-
-# Set map layout
-fig.update_layout(
-    title_text = '2022 World Total Carbon Emission = 37150 Mt Co2',
-    geo=dict(
-        showframe=False,
-        showcoastlines=True,
-        projection_type='equirectangular'
-    )
-)
-
-# Add click event handling function
-fig.update_traces(
-    customdata=[11397, 601, 1054, 2830, 5057, 729, 5057, 2830, 1652, 691, 663, 666],  # Data values for each country
-    hovertemplate='<b>%{text}</b><br>Value: %{customdata}',  # Template shown on hover, including country name and data value
-)
-
-# Show map
-fig.show()
-
-import plotly.graph_objects as go
-
-# Data
+# Data Showing
 countries = ['China', 'South Korea', 'Japan', 'India', 'USA', 'Indonesia', 'Russia', 'Iran', 'Saudi Arabia', 'Germany']
 codes = ['CHN', 'KOR', 'JPN', 'IND', 'USA', 'IDN', 'RUS', 'IRN', 'SAU', 'DEU']
 emissions = [11397, 601, 1054, 2830, 5057, 729, 1652, 691, 663, 666]
-text = ["China #1", "South Korea #10", "Japan #5", "India #3", "USA #2", "Indonesia #6", "Russia #4", "Iran #7", "Saudi Arabia #9", "Germany #8"]
+text = ["China #1", "South Korea #10", "Japan #5", "India #3", "USA #2", "Indonesia #6", "Russia #4", "Iran #7 ", "Saudi Arabia #9", "Germany #8"]
 
-# Create table
-fig = go.Figure(data=[go.Table(
-    header=dict(values=['Rank', 'Country', 'MtCO₂'],
-                fill_color='paleturquoise',
-                align='center'),
-    cells=dict(values=[list(range(1, 11)), countries, emissions],
-               fill_color='lavender',
-               align='center'))
-])
+# Sort the data by 'emissions'
+sorted_data = sorted(zip(countries, emissions), key=lambda x: x[1], reverse=True)
+sorted_countries, sorted_emissions = zip(*sorted_data)
 
-# Set title
-fig.update_layout(
-    title='Countries: Carbon Emission Rank Top 10 (MtCO₂)'
+#Create map data
+map_fig = go.Figure()
+
+#Create map data
+map_fig.add_trace(go.Choropleth(
+ locations=codes,
+ z=emissions,
+ text=text,
+ colorscale='Reds', # Use Reds color scale
+ autocolorscale=False,
+ marker_line_color='darkgray',
+ marker_line_width=0.5,
+ colorbar_title='Amount',
+ customdata=emissions, #Data values ​​for each country
+ hovertemplate='<b>%{text}</b><br>Value: %{customdata}', # Template displayed when hovering, including country name and data value
+))
+
+# Set map layout
+map_fig.update_layout(
+ title_text='2022 World Total Carbon Emission = 37150 Mt Co2',
+ geo=dict(
+ showframe=False,
+ showcoastlines=True,
+ projection_type='equirectangular'
+ )
 )
 
-# Show table
-fig.show()
+#Create table
+table_fig = go.Figure(data=[go.Table(
+ header=dict(values=['Rank', 'Country', 'MtCO₂'],
+ fill_color='paleturquoise',
+ align='center'),
+ cells=dict(values=[list(range(1, 11)), sorted_countries[:10], sorted_emissions[:10]],
+ fill_color='lavender',
+ align='center')
+)])
+
+# Set title
+table_fig.update_layout(
+ title='Countries: Carbon Emission Rank Top 10 (MtCO₂)'
+)
+
+# show map
+map_fig.show()
+
+# show table
+table_fig.show()
