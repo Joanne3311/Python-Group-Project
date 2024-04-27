@@ -5,11 +5,11 @@ fig = go.Figure(go.Choropleth(
     locations = ['CHN', 'KOR', 'JPN', 'IND', 'USA', 'IDN', 'RUS', 'IRN', 'SAU', 'DEU'],
     z = [11397, 601, 1054, 2830, 5057, 729, 1652, 691, 663, 666],  # 这是您的数据值
     text = ["China #1", "South Korea #10", "Japan #5", "India #3", "USA #2", "Indonesia #6", "Russia #4", "Iran #7", "Saudi Arabia #9", "Germany #8"],
-    colorscale = 'Reds',  # 调色板
+  colorscale='Reds',  # 使用 Reds 色階
     autocolorscale=False,
     marker_line_color='darkgray',
     marker_line_width=0.5,
-    colorbar_title = 'Amount'
+    colorbar_title='Amount'
 ))
 
 # 设置地图布局
